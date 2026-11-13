@@ -1,0 +1,53 @@
+{
+  "_note": "SYNTHETIC beneficiaries for the demo. Not real people. Dates are stored as days before today so the demo never goes stale.",
+  "beneficiaries": [
+    {
+      "id": "1042",
+      "type": "newborn",
+      "dob_days_ago": 6,
+      "given": {"BCG": 5, "OPV-0": 5, "HepB-0": 5},
+      "name": {"en": "Baby of Lakshmi", "hi": "लक्ष्मी का शिशु", "kn": "ಲಕ್ಷ್ಮಿ ಅವರ ಮಗು"},
+      "aliases": ["lakshmi", "laxmi", "लक्ष्मी", "ಲಕ್ಷ್ಮಿ"]
+    },
+    {
+      "id": "1043",
+      "type": "pregnant",
+      "lmp_days_ago": 140,
+      "given": {"Td-1": 60},
+      "name": {"en": "Meena", "hi": "मीना", "kn": "ಮೀನಾ"},
+      "aliases": ["meena", "mina", "मीना", "ಮೀನಾ"]
+    },
+    {
+      "id": "1044",
+      "type": "newborn",
+      "dob_days_ago": 2,
+      "given": {},
+      "name": {"en": "Baby of Sunita", "hi": "सुनीता का शिशु", "kn": "ಸುನೀತಾ ಅವರ ಮಗು"},
+      "aliases": ["sunita", "सुनीता", "ಸುನೀತಾ"]
+    },
+    {
+      "id": "2051",
+      "type": "child",
+      "dob_days_ago": 45,
+      "given": {"BCG": 44, "OPV-0": 44, "HepB-0": 44},
+      "name": {"en": "Kavya", "hi": "काव्या", "kn": "ಕಾವ್ಯ"},
+      "aliases": ["kavya", "kavyaa", "काव्या", "ಕಾವ್ಯ", "ಕಾವ್ಯಾ"]
+    },
+    {
+      "id": "2052",
+      "type": "pregnant",
+      "lmp_days_ago": 259,
+      "given": {"Td-1": 150, "Td-2": 120},
+      "name": {"en": "Ayesha", "hi": "आयशा", "kn": "ಆಯಿಷಾ"},
+      "aliases": ["ayesha", "aisha", "आयशा", "ಆಯಿಷಾ"]
+    },
+    {
+      "id": "3007",
+      "type": "child",
+      "dob_days_ago": 100,
+      "given": {"BCG": 99, "OPV-0": 99, "HepB-0": 99, "OPV-1": 57, "Penta-1": 57, "RVV-1": 57, "fIPV-1": 57, "PCV-1": 57},
+      "name": {"en": "Baby of Roopa", "hi": "रूपा का शिशु", "kn": "ರೂಪಾ ಅವರ ಮಗು"},
+      "aliases": ["roopa", "rupa", "रूपा", "ರೂಪಾ"]
+    }
+  ]
+}

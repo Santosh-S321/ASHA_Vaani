@@ -1,0 +1,114 @@
+{
+  "sources": [
+    "Job Aid for Home Visits by ASHA (Newborn and Young Child), MoHFW, 2018 — newborn danger signs: https://hbnc-hbyc.mohfw.gov.in/assets/document/English-Job%20Aid%20for%20ASHA%20on%20HBYC.pdf",
+    "Home Based Newborn Care Operational Guidelines (Revised 2014), MoHFW: https://hbnc-hbyc.mohfw.gov.in/documents/hbnc",
+    "Mother and Child Protection (MCP) Card, MoHFW and MoWCD — danger signs during pregnancy and after delivery"
+  ],
+  "signs": [
+    {
+      "id": "bleeding",
+      "applies_to": ["pregnant", "postpartum"],
+      "label": {"en": "bleeding in pregnancy or after delivery", "hi": "खून आना", "kn": "ರಕ್ತಸ್ರಾವ"},
+      "source": "MCP Card",
+      "keywords": ["bleeding", "blood aa", "khoon", "khun aa", "खून", "रक्तस्राव", "ब्लीडिंग", "raktasrava", "ರಕ್ತಸ್ರಾವ", "ರಕ್ತ ಹೋಗ", "ಬ್ಲೀಡಿಂಗ್"]
+    },
+    {
+      "id": "convulsions",
+      "applies_to": ["pregnant", "postpartum", "newborn", "child"],
+      "label": {"en": "fits or convulsions", "hi": "झटके या दौरे", "kn": "ಸೆಳೆತ / ಫಿಟ್ಸ್"},
+      "source": "MCP Card; HBNC guidelines",
+      "keywords": ["fits", "convulsion", "jhatke", "jhatka", "daure", "daura", "झटके", "झटका", "दौरे", "दौरा", "ಸೆಳೆತ", "selata", "ಫಿಟ್ಸ್"]
+    },
+    {
+      "id": "severe_headache_blurred_vision",
+      "applies_to": ["pregnant", "postpartum"],
+      "label": {"en": "severe headache or blurred vision", "hi": "तेज़ सिरदर्द या धुंधला दिखना", "kn": "ತೀವ್ರ ತಲೆನೋವು ಅಥವಾ ಮಸುಕು ದೃಷ್ಟಿ"},
+      "source": "MCP Card",
+      "keywords": ["severe headache", "tez sir dard", "tez sirdard", "blurred vision", "dhundhla", "धुंधला", "तेज़ सिरदर्द", "तेज सिरदर्द", "सिर में तेज", "ಮಸುಕು", "ತೀವ್ರ ತಲೆನೋವು"]
+    },
+    {
+      "id": "high_fever_mother",
+      "applies_to": ["pregnant", "postpartum"],
+      "label": {"en": "high fever", "hi": "तेज़ बुखार", "kn": "ಜೋರು ಜ್ವರ"},
+      "source": "MCP Card",
+      "keywords": ["high fever", "tez bukhar", "tez bukhaar", "तेज़ बुखार", "तेज बुखार", "jor jwara", "ಜೋರು ಜ್ವರ", "ಹೆಚ್ಚು ಜ್ವರ"]
+    },
+    {
+      "id": "severe_abdominal_pain",
+      "applies_to": ["pregnant", "postpartum"],
+      "label": {"en": "severe pain in the abdomen", "hi": "पेट में तेज़ दर्द", "kn": "ತೀವ್ರ ಹೊಟ್ಟೆ ನೋವು"},
+      "source": "MCP Card",
+      "keywords": ["severe abdominal pain", "severe stomach pain", "pet me tez dard", "pet mein tez dard", "पेट में तेज", "ತೀವ್ರ ಹೊಟ್ಟೆ ನೋವು", "ಹೊಟ್ಟೆ ತುಂಬಾ ನೋವು"]
+    },
+    {
+      "id": "swelling_face_hands",
+      "applies_to": ["pregnant"],
+      "label": {"en": "swelling of face or hands", "hi": "चेहरे या हाथों पर सूजन", "kn": "ಮುಖ ಅಥವಾ ಕೈ ಊತ"},
+      "source": "MCP Card",
+      "keywords": ["face swelling", "swelling on face", "swelling of face", "chehre pe sujan", "chehre par sujan", "chehra sooja", "चेहरे पर सूजन", "हाथों में सूजन", "ಮುಖ ಊತ", "ಮುಖ ಬಾತ"]
+    },
+    {
+      "id": "reduced_fetal_movement",
+      "applies_to": ["pregnant"],
+      "label": {"en": "baby moving less in the womb", "hi": "पेट में बच्चे की हलचल कम", "kn": "ಹೊಟ್ಟೆಯಲ್ಲಿ ಮಗುವಿನ ಚಲನೆ ಕಡಿಮೆ"},
+      "source": "MCP Card",
+      "keywords": ["movement kam", "baby movement less", "halchal kam", "हलचल कम", "हलचल नहीं", "ಚಲನೆ ಕಡಿಮೆ", "ಚಲನೆ ಇಲ್ಲ"]
+    },
+    {
+      "id": "foul_discharge",
+      "applies_to": ["postpartum"],
+      "label": {"en": "foul-smelling discharge after delivery", "hi": "बदबूदार स्राव", "kn": "ದುರ್ವಾಸನೆಯ ಸ್ರಾವ"},
+      "source": "MCP Card",
+      "keywords": ["foul smell", "badbudar", "badboodar", "बदबूदार", "ದುರ್ವಾಸನೆ"]
+    },
+    {
+      "id": "newborn_not_feeding",
+      "applies_to": ["newborn"],
+      "label": {"en": "baby not able to feed", "hi": "बच्चा दूध नहीं पी पा रहा", "kn": "ಮಗು ಹಾಲು ಕುಡಿಯುತ್ತಿಲ್ಲ"},
+      "source": "ASHA Job Aid (HBNC)",
+      "keywords": ["not feeding", "not able to feed", "doodh nahi pee", "doodh nahin pee", "dudh nahi pee", "feeding band", "दूध नहीं पी", "दूध नहीं पीता", "ಹಾಲು ಕುಡಿಯುತ್ತಿಲ್ಲ", "ಹಾಲು ಕುಡಿಯಲ್ಲ", "haalu kudiyuttilla"]
+    },
+    {
+      "id": "newborn_fever",
+      "applies_to": ["newborn"],
+      "label": {"en": "fever in the newborn (feels hot to touch)", "hi": "नवजात को बुखार", "kn": "ನವಜಾತ ಶಿಶುವಿಗೆ ಜ್ವರ"},
+      "source": "ASHA Job Aid (HBNC)",
+      "keywords": ["fever", "bukhar", "bukhaar", "बुखार", "jwara", "ಜ್ವರ", "body garam", "बदन गरम"]
+    },
+    {
+      "id": "newborn_cold",
+      "applies_to": ["newborn"],
+      "label": {"en": "newborn cold to touch", "hi": "बच्चा ठंडा पड़ गया", "kn": "ಮಗು ತಣ್ಣಗಾಗಿದೆ"},
+      "source": "ASHA Job Aid (HBNC)",
+      "keywords": ["cold to touch", "thanda pad", "body thanda", "ठंडा पड़", "शरीर ठंडा", "ತಣ್ಣಗಾಗಿದೆ", "ತಣ್ಣಗೆ ಇದೆ"]
+    },
+    {
+      "id": "newborn_fast_breathing",
+      "applies_to": ["newborn", "child"],
+      "label": {"en": "fast or difficult breathing", "hi": "तेज़ या मुश्किल से सांस", "kn": "ವೇಗದ ಅಥವಾ ಕಷ್ಟದ ಉಸಿರಾಟ"},
+      "source": "ASHA Job Aid (HBNC)",
+      "keywords": ["fast breathing", "difficult breathing", "tez saans", "saans tez", "pasli chal", "chest indrawing", "तेज़ सांस", "तेज सांस", "सांस तेज", "पसली चल", "ಉಸಿರಾಟ ವೇಗ", "ಉಸಿರಾಟ ಕಷ್ಟ"]
+    },
+    {
+      "id": "newborn_weak_cry_limp",
+      "applies_to": ["newborn"],
+      "label": {"en": "weak cry or limp baby", "hi": "कमज़ोर रोना या बच्चा सुस्त", "kn": "ದುರ್ಬಲ ಅಳು ಅಥವಾ ಮಗು ಚುರುಕಿಲ್ಲ"},
+      "source": "ASHA Job Aid (HBNC)",
+      "keywords": ["weak cry", "limp", "lethargic", "sust", "सुस्त", "कमज़ोर रो", "कमजोर रो", "ದುರ್ಬಲ ಅಳು", "ಚುರುಕಿಲ್ಲ"]
+    },
+    {
+      "id": "newborn_yellow_palms_soles",
+      "applies_to": ["newborn"],
+      "label": {"en": "yellow palms and soles", "hi": "हथेली और तलवे पीले", "kn": "ಅಂಗೈ ಅಂಗಾಲು ಹಳದಿ"},
+      "source": "ASHA Job Aid (HBNC)",
+      "keywords": ["yellow palms", "yellow soles", "peeliya", "jaundice", "पीलिया", "हथेली पीली", "तलवे पीले", "ಕಾಮಾಲೆ", "ಅಂಗೈ ಹಳದಿ"]
+    },
+    {
+      "id": "newborn_cord_infection",
+      "applies_to": ["newborn"],
+      "label": {"en": "oozing or red umbilicus", "hi": "नाभि से मवाद या लाली", "kn": "ಹೊಕ್ಕುಳಿನಿಂದ ಕೀವು ಅಥವಾ ಕೆಂಪು"},
+      "source": "ASHA Job Aid (HBNC)",
+      "keywords": ["oozing umbilicus", "cord pus", "naabhi se pus", "nabhi se pus", "naal se pus", "नाभि से मवाद", "नाभि लाल", "ಹೊಕ್ಕುಳ ಕೀವು", "ಹೊಕ್ಕುಳಿನಿಂದ ಕೀವು"]
+    }
+  ]
+}
