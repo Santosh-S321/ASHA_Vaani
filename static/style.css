@@ -1,0 +1,59 @@
+:root {
+  --dark: #0F3D3E; --light: #F7F4EE; --accent: #E8913A; --accent-ink: #B4531C;
+  --ink: #23302F; --muted: #5A6966; --card: #FFFDF9; --line: #E3DDD2; --mint: #E6EFEC;
+  --danger: #B42318; --danger-bg: #FDECEA;
+}
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+  background: var(--light); color: var(--ink); font-size: 17px; line-height: 1.45; }
+.top { position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 12px 16px; background: var(--dark); color: var(--light); }
+.brand { font-weight: 800; font-size: 20px; }
+.tag { font-weight: 500; font-size: 13px; color: #C9DEDA; margin-left: 6px; }
+.top select { font-size: 16px; padding: 8px 10px; border-radius: 10px; border: 0; background: var(--light); color: var(--ink); }
+main { max-width: 720px; margin: 0 auto; padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+
+.banner { background: var(--danger-bg); color: var(--danger); border: 2px solid var(--danger); border-radius: 14px;
+  padding: 14px 16px; font-weight: 700; }
+
+.mic-wrap { display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 8px 0; }
+.mic { width: 168px; height: 168px; border-radius: 50%; border: 0; cursor: pointer; background: var(--dark);
+  color: var(--light); font-size: 18px; font-weight: 800; display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 8px; box-shadow: 0 6px 18px rgba(15,61,62,.25); }
+.mic:focus-visible { outline: 4px solid var(--accent); outline-offset: 4px; }
+.mic.live { background: var(--accent); color: var(--dark); animation: pulse 1.6s ease-in-out infinite; }
+.mic-icon { width: 26px; height: 40px; border: 4px solid currentColor; border-radius: 14px; }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 0 0 rgba(232,145,58,.45); } 50% { box-shadow: 0 0 0 18px rgba(232,145,58,0); } }
+@media (prefers-reduced-motion: reduce) { .mic.live { animation: none; } }
+.status { margin: 0; color: var(--muted); text-align: center; }
+.meta-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: center; font-size: 14px; color: var(--muted); }
+.toggle { display: inline-flex; gap: 6px; align-items: center; }
+.metric { font-variant-numeric: tabular-nums; }
+
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+.card h2 { margin: 0 0 10px; font-size: 18px; color: var(--dark); }
+.card-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.pill { font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--mint); color: var(--dark); }
+
+.form { display: grid; grid-template-columns: 40% 60%; margin: 0; }
+.form dt, .form dd { margin: 0; padding: 8px 0; border-top: 1px solid var(--line); }
+.form dt { color: var(--muted); font-size: 15px; }
+.form dd { font-weight: 600; }
+.chip { display: inline-block; margin: 2px 4px 2px 0; padding: 2px 8px; border-radius: 8px; background: var(--mint); font-size: 14px; }
+.chip.danger { background: var(--danger-bg); color: var(--danger); }
+.empty { color: var(--muted); font-weight: 400; }
+
+.log { display: flex; flex-direction: column; gap: 8px; max-height: 340px; overflow-y: auto; }
+.msg { padding: 10px 12px; border-radius: 12px; max-width: 88%; }
+.msg.user { align-self: flex-end; background: var(--mint); }
+.msg.agent { align-self: flex-start; background: #F1ECE3; }
+.msg.alert { background: var(--danger-bg); color: var(--danger); font-weight: 700; }
+.msg small { display: block; color: var(--muted); font-size: 12px; }
+.typed { display: flex; gap: 8px; margin-top: 12px; }
+.typed input { flex: 1; font-size: 16px; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); }
+.typed button { font-size: 16px; padding: 10px 16px; border-radius: 10px; border: 0; background: var(--dark); color: var(--light); }
+
+.followups { margin: 0; padding-left: 20px; }
+.followups li { padding: 6px 0; }
+.followups .flag { color: var(--danger); font-weight: 700; }
+.disclaimer { font-size: 13px; color: var(--muted); text-align: center; }
