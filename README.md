@@ -10,6 +10,18 @@ all without any typing.
 
 Built for the Gnani Voice Hackathon, PS1 Healthcare.
 
+## Try it now
+
+**Live demo:** https://asha-vaani-e4zd.onrender.com/
+
+- Open it in **Chrome** (Android phone or laptop), tap **Start visit** and allow the microphone.
+- Use **earphones**, so the agent doesn't hear its own voice.
+- Pick **हिंदी + English** or **ಕನ್ನಡ + English** at the top, then follow the [demo script](#demo-script-2-minutes).
+- The app runs on Render's free plan, which sleeps when idle. **The first load can take up to a minute.** After that it responds normally.
+- No mic? Use the **typed box** at the bottom of the page. It runs the same flow.
+
+**Code:** https://github.com/Santosh-S321/ASHA_Vaani
+
 > **Prototype. Synthetic beneficiaries only.** The agent says it is an AI in its first turn. It gives no diagnosis, treatment or dosage advice.
 
 ## What it does
@@ -29,7 +41,7 @@ Built for the Gnani Voice Hackathon, PS1 Healthcare.
 
 | Service | Model | How it is used |
 |---|---|---|
-| Streaming speech-to-text | **Prisma v3.0** | WebSocket `wss://api.vachana.ai/stt/v3/stream`. Settings: `language_code` `hi-IN,en-IN` or `kn-IN,en-IN`, `format=codemix`, 800 ms end-of-speech pause. The browser sends 16 kHz 16-bit PCM in 1,024-byte frames. `speech_start` events stop agent playback, so she can interrupt (barge-in). |
+| Streaming speech-to-text | **Prisma v3.0** | WebSocket `wss://api.vachana.ai/stt/v3/stream`. Settings: `language_code` `hi-IN` or `kn-IN` (the live stream takes one locale), `format=codemix`, 800 ms end-of-speech pause. The browser sends 16 kHz 16-bit PCM in 1,024-byte frames. `speech_start` events stop agent playback, so she can interrupt (barge-in). |
 | Text-to-speech | **Timbre v3.0** | REST `POST /api/v1/tts/inference`, stock voice `Shivani`, `language=auto`, WAV output. Every reply is a fixed template, so audio is cached on disk and repeated prompts cost no credits. |
 
 No voice cloning. No telephony.
@@ -63,7 +75,8 @@ flowchart LR
 Requires Python 3.10+ and Chrome.
 
 ```bash
-git clone <your-repo-url> asha-vaani && cd asha-vaani
+git clone https://github.com/Santosh-S321/ASHA_Vaani.git
+cd ASHA_Vaani
 python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 cp .env.example .env
@@ -84,12 +97,29 @@ uvicorn app.main:app --reload --port 8000
 Open http://localhost:8000, pick the language, tap **Start visit** and speak.
 
 - **No key yet?** The typed box at the bottom of the page runs the same flow without voice.
-- **On a phone:** browsers only allow the mic on HTTPS. Deploy the app (start command `uvicorn app.main:app --host 0.0.0.0 --port $PORT`) or use an HTTPS tunnel to your laptop.
+- **On a phone:** browsers only allow the mic on HTTPS, so `http://` on your local network won't work. Use the [live demo](https://asha-vaani-e4zd.onrender.com/), deploy your own copy (below), or use an HTTPS tunnel to your laptop.
 - **Earphones** stop the agent's own voice from being picked up by the mic.
+
+## Deploy your own copy (Render)
+
+The live demo runs on [Render](https://render.com) as a Python web service.
+
+1. On Render: **New → Web Service** → connect this GitHub repo.
+2. **Build command:** `pip install -r requirements.txt`
+3. **Start command:** `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+4. **Environment variables:**
+   - `GNANI_API_KEY`
+   - `DATA_ENCRYPTION_KEY`
+   - `PYTHON_VERSION` = `3.11.9`
+   - Optional: `LLM_API_KEY`, `LLM_MODEL`
+   - Never upload `.env`.
+5. Deploy, then open `https://<your-service>.onrender.com/api/status`. It should show `"gnani": true`.
+
+Every push to `main` redeploys. On the free plan, stored records and cached audio are wiped on each redeploy or restart. That fits the "delete after judging" rule.
 
 ## Demo script (2 minutes)
 
-Hindi + English:
+Hindi + English (on the [live demo](https://asha-vaani-e4zd.onrender.com/) or locally):
 
 1. "ID ek shunya char do" → Lakshmi's baby, newborn
 2. "Baby ka vajan do point aath kilo hai, doodh theek pee raha hai"
@@ -99,6 +129,15 @@ Hindi + English:
 6. "baby ko tez bukhar hai, vajan 3 kilo" → danger alert is spoken first, record flagged
 7. "kaun si dawai dein?" → agent refuses to give advice and points her to the ANM or PHC
 8. "haan save" → the case appears at the top of the follow-ups as REFER TO PHC
+
+Kannada + English:
+
+1. "ಐಡಿ ಒಂದು ಸೊನ್ನೆ ನಾಲ್ಕು ಎರಡು" (ID 1042)
+2. "ತೂಕ ಎರಡು ಪಾಯಿಂಟ್ ಎಂಟು ಕಿಲೋ" (weight 2.8 kg)
+3. "ಇಲ್ಲ, ತೂಕ ಎರಡು ಪಾಯಿಂಟ್ ಒಂಬತ್ತು ಕಿಲೋ" (correction)
+4. "ಹೌದು, ಸೇವ್ ಮಾಡಿ" (save)
+5. "ಐಡಿ ಒಂದು ಸೊನ್ನೆ ನಾಲ್ಕು ನಾಲ್ಕು", then "ಮಗುವಿಗೆ ಜ್ವರ ಇದೆ, ತೂಕ ಮೂರು ಕಿಲೋ" → danger alert first, record flagged
+6. "ಯಾವ ಔಷಧಿ ಕೊಡಬೇಕು?" → refusal, points her to the ANM or PHC
 
 Synthetic beneficiaries are in `app/data/beneficiaries.json` (IDs 1042, 1043, 1044, 2051, 2052, 3007).
 
