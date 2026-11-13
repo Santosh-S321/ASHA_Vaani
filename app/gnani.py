@@ -22,12 +22,17 @@ class PrismaStream:
     Server events: connected, speech_start, processing, transcript (always final), error.
     """
 
+    RETRY_GAP_S = 3.0   # never reconnect faster than this
+
     def __init__(self, language_codes: str, on_event: EventHandler):
         self.language_codes = language_codes
         self.on_event = on_event
         self.ws = None
         self._reader: asyncio.Task | None = None
         self._lock = asyncio.Lock()
+        self._last_attempt = 0.0
+        self._last_error: str | None = None
+        self.fatal: str | None = None   # set when Gnani rejects our settings; stops all retries
 
     def _headers(self) -> dict:
         h = {
@@ -48,14 +53,22 @@ class PrismaStream:
     def is_open(self) -> bool:
         return self.ws is not None and self._reader is not None and not self._reader.done()
 
-    async def ensure_open(self):
+    async def ensure_open(self) -> bool:
+        """Open the stream if needed. Returns False if we should drop audio for now."""
         async with self._lock:
             if self.is_open:
-                return
+                return True
+            if self.fatal:
+                return False
+            now = asyncio.get_running_loop().time()
+            if now - self._last_attempt < self.RETRY_GAP_S:
+                return False
+            self._last_attempt = now
             self.ws = await websockets.connect(
                 config.GNANI_STT_URL, additional_headers=self._headers(), max_size=2**22
             )
             self._reader = asyncio.create_task(self._read())
+            return True
 
     async def _read(self):
         try:
@@ -66,14 +79,23 @@ class PrismaStream:
                     event = json.loads(raw)
                 except json.JSONDecodeError:
                     continue
-                await self.on_event(event)
+                if event.get("type") == "error":
+                    self._last_error = event.get("message")
+                try:
+                    await self.on_event(event)
+                except Exception:  # noqa: BLE001 - browser gone; keep reading so the stream closes cleanly
+                    log.debug("on_event failed", exc_info=True)
         except websockets.ConnectionClosed as e:
             log.info("Prisma stream closed: %s", e)
+            if e.rcvd and e.rcvd.code == 1008:   # policy violation = our settings were rejected
+                self.fatal = self._last_error or "Gnani rejected the connection settings"
+                log.error("Prisma rejected the settings, not retrying: %s", self.fatal)
         except Exception:  # noqa: BLE001
             log.exception("Prisma reader failed")
 
     async def send_audio(self, frame: bytes):
-        await self.ensure_open()
+        if not await self.ensure_open():
+            return   # drop the frame: waiting to retry, or settings rejected
         try:
             await self.ws.send(frame)
         except websockets.ConnectionClosed:

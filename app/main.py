@@ -59,10 +59,18 @@ async def ws_endpoint(ws: WebSocket, lang: str = config.DEFAULT_LANG):
     session = Session(lang, extractor, store)
     send_lock, turn_lock = asyncio.Lock(), asyncio.Lock()
     tasks: set[asyncio.Task] = set()
+    closed = False
+    sent_errors: set[str] = set()
 
     async def send(msg: dict):
+        nonlocal closed
+        if closed:
+            return
         async with send_lock:
-            await ws.send_json(msg)
+            try:
+                await ws.send_json(msg)
+            except Exception:  # noqa: BLE001 - browser closed the tab or changed language
+                closed = True
 
     async def speak(lines: list[str], t0: float | None = None, stt_ms: int | None = None):
         first = True
@@ -103,8 +111,11 @@ async def ws_endpoint(ws: WebSocket, lang: str = config.DEFAULT_LANG):
         elif kind == "transcript" and ev.get("text", "").strip():
             spawn(on_text(ev["text"], ev.get("latency"), ev.get("detected_language_code")))
         elif kind == "error":
-            log.warning("Prisma error: %s", ev.get("message"))
-            await send({"type": "error", "message": f"STT: {ev.get('message')}"})
+            message = ev.get("message") or "unknown error"
+            if message not in sent_errors:   # report each distinct error once
+                sent_errors.add(message)
+                log.warning("Prisma error: %s", message)
+                await send({"type": "error", "message": f"Speech service: {message}"})
 
     stt = PrismaStream(config.LANGUAGES[lang]["stt"], on_stt_event) if config.gnani_enabled() else None
     if stt is None:
@@ -114,9 +125,10 @@ async def ws_endpoint(ws: WebSocket, lang: str = config.DEFAULT_LANG):
     await send({"type": "followups", "items": store.followups()})
 
     try:
-        while True:
+        while not closed:
             msg = await ws.receive()
             if msg["type"] == "websocket.disconnect":
+                closed = True
                 break
             if msg.get("bytes") is not None:
                 if stt:

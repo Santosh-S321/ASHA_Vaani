@@ -32,10 +32,13 @@ LLM_TIMEOUT_S = float(os.getenv("LLM_TIMEOUT_S", "6"))
 # Storage
 DATA_ENCRYPTION_KEY = os.getenv("DATA_ENCRYPTION_KEY", "").strip()
 
-# Languages offered in the UI. STT accepts up to 4 codes with Prisma v3.0.
+# Languages offered in the UI. The live Prisma v3.0 stream accepts exactly ONE locale in
+# language_code; format=codemix keeps the English words in Latin script.
+# Optional override for both, e.g. GNANI_STT_LANGUAGE=indic-auto
+_STT_OVERRIDE = os.getenv("GNANI_STT_LANGUAGE", "").strip()
 LANGUAGES = {
-    "hi": {"stt": "hi-IN,en-IN", "tts": "auto", "name": "हिंदी + English"},
-    "kn": {"stt": "kn-IN,en-IN", "tts": "auto", "name": "ಕನ್ನಡ + English"},
+    "hi": {"stt": _STT_OVERRIDE or "hi-IN", "tts": "auto", "name": "हिंदी + English"},
+    "kn": {"stt": _STT_OVERRIDE or "kn-IN", "tts": "auto", "name": "ಕನ್ನಡ + English"},
 }
 DEFAULT_LANG = "hi"
 
