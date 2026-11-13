@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0F3D3E">
+  <title>ASHA Vaani</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">ASHA Vaani <span class="tag">AI voice register</span></div>
+    <select id="lang" aria-label="Language">
+      <option value="hi">हिंदी + English</option>
+      <option value="kn">ಕನ್ನಡ + English</option>
+    </select>
+  </header>
+
+  <main>
+    <div id="banner" class="banner" hidden role="alert"></div>
+
+    <section class="mic-wrap">
+      <button id="mic" class="mic" aria-pressed="false">
+        <span class="mic-icon" aria-hidden="true"></span>
+        <span id="mic-label">Start visit</span>
+      </button>
+      <p id="status" class="status">Tap to start. Earphones work best.</p>
+      <div class="meta-row">
+        <label class="toggle"><input type="checkbox" id="bargein" checked> Interrupt agent when I speak</label>
+        <span id="metric" class="metric"></span>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="card-head">
+        <h2>Visit record</h2>
+        <span id="state" class="pill">Waiting for ID</span>
+      </div>
+      <dl id="form" class="form"></dl>
+    </section>
+
+    <section class="card">
+      <h2>Conversation</h2>
+      <div id="log" class="log" aria-live="polite"></div>
+      <form id="typed" class="typed">
+        <input id="typed-input" autocomplete="off" placeholder="Type instead (for testing)">
+        <button type="submit">Send</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Follow-ups</h2>
+      <ol id="followups" class="followups"></ol>
+    </section>
+
+    <p class="disclaimer">Prototype for the Gnani Voice Hackathon. Synthetic beneficiaries only.
+      This AI assistant gives no diagnosis, treatment or dosage advice.</p>
+  </main>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

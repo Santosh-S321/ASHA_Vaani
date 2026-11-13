@@ -1,0 +1,15 @@
+# secrets
+.env
+.env.*
+!.env.example
+
+# data: encrypted records and cached audio never go to GitHub
+data/
+.cache/
+
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
